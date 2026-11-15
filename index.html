@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HUNTER GAMING PRO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b15;color:white;font-family:Arial}
+header{padding:17px;background:#17152a;text-align:center}
+.logo{font-size:27px;font-weight:bold;color:#c477ff}
+nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;padding:12px;background:#101323}
+button{background:#a13cff;color:white;border:0;padding:12px;border-radius:8px;cursor:pointer;font-weight:bold}
+nav button{background:#29223d}
+main{max-width:1000px;margin:auto;padding:15px}
+.page{display:none}
+.page.active{display:block}
+.panel,.card{background:#171b2b;border:1px solid #37344d;padding:17px;border-radius:12px;margin:12px 0}
+h2{color:#c78aff}
+input,select{width:100%;padding:13px;margin:8px 0;background:#0b1020;color:white;border:1px solid #444;border-radius:7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.price{color:#ffd15e;font-size:20px;margin:12px 0}
+.small{font-size:12px;color:#aaa}
+footer{text-align:center;padding:25px;color:#aaa}
+a{color:#80caff}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">⚡ HUNTER GAMING</div>
+<p>SHOP ACC GAME UY TÍN</p>
+</header>
+
+<nav>
+<button onclick="show('home')">Trang chủ</button>
+<button onclick="show('shop')">Mua acc</button>
+<button onclick="show('card')">Nạp thẻ</button>
+<button onclick="show('game')">Nạp game</button>
+<button onclick="show('login')">Đăng nhập</button>
+<button onclick="show('account')">Tài khoản</button>
+<button onclick="show('admin')">Admin</button>
+</nav>
+
+<main>
+
+<section id="home" class="page active">
+<div class="panel" style="text-align:center;padding:40px 15px">
+<h1 style="color:#c477ff">HUNTER GAMING PRO</h1>
+<h3>LIÊN QUÂN MOBILE - FREE FIRE</h3>
+<p>Mua acc và dịch vụ game</p>
+<button onclick="show('shop')">MUA ACC NGAY</button>
+</div>
+<div class="grid">
+<div class="card">💳 <h3>Nạp thẻ</h3><p>Mobifone và Garena</p></div>
+<div class="card">💎 <h3>Kim cương</h3><p>Free Fire</p></div>
+<div class="card">🛡️ <h3>Quân Huy</h3><p>Liên Quân Mobile</p></div>
+</div>
+</section>
+
+<section id="login" class="page">
+<div class="panel">
+<h2>ĐĂNG NHẬP</h2>
+<input id="email" type="email" placeholder="Gmail">
+<input id="password" type="password" placeholder="Mật khẩu">
+<button onclick="login()">ĐĂNG NHẬP</button>
+<p id="loginMsg"></p>
+<button onclick="show('register')">ĐĂNG KÝ</button>
+</div>
+</section>
+
+<section id="register" class="page">
+<div class="panel">
+<h2>ĐĂNG KÝ</h2>
+<input id="regEmail" type="email" placeholder="Gmail">
+<input id="regPass" type="password" placeholder="Mật khẩu">
+<button onclick="register()">TẠO TÀI KHOẢN</button>
+<p id="regMsg"></p>
+</div>
+</section>
+
+<section id="shop" class="page">
+<h2>🛒 SHOP TÀI KHOẢN</h2>
+<div id="products" class="grid"></div>
+</section>
+
+<section id="card" class="page">
+<div class="panel">
+<h2>💳 NẠP THẺ CÀO</h2>
+<label>Nhà cung cấp</label>
+<select id="provider">
+<option>Mobifone</option>
+<option>Garena</option>
+</select>
+<label>Mệnh giá</label>
+<select id="value">
+<option value="10000">10.000đ</option>
+<option value="20000">20.000đ</option>
+<option value="50000">50.000đ</option>
+<option value="100000">100.000đ</option>
+<option value="200000">200.000đ</option>
+<option value="500000">500.000đ</option>
+</select>
+<button onclick="cardRequest()">TẠO YÊU CẦU NẠP</button>
+<p id="cardResult"></p>
+<p class="small">
+Đây là chức năng tạo yêu cầu thử nghiệm. Chưa thu thập mã thẻ,
+chưa gửi thẻ và chưa cộng tiền. Muốn nạp tự động cần API nhà cung cấp
+được cấp phép và xác minh giao dịch từ máy chủ.
+</p>
+</div>
+</section>
+
+<section id="game" class="page">
+<div class="panel">
+<h2>💎 FREE FIRE - KIM CƯƠNG</h2>
+<input id="ffid" placeholder="ID người chơi Free Fire">
+<select id="ffpack">
+<option value="10000">Gói 50 kim cương - 10.000đ demo</option>
+<option value="20000">Gói 100 kim cương - 20.000đ demo</option>
+<option value="50000">Gói 300 kim cương - 50.000đ demo</option>
+</select>
+<button onclick="gameRequest('Free Fire')">TẠO ĐƠN</button>
+</div>
+
+<div class="panel">
+<h2>🛡️ LIÊN QUÂN - QUÂN HUY</h2>
+<input id="lqid" placeholder="ID người chơi Liên Quân">
+<select id="lqpack">
+<option value="20000">Gói 20.000đ demo</option>
+<option value="50000">Gói 50.000đ demo</option>
+<option value="100000">Gói 100.000đ demo</option>
+</select>
+<button onclick="gameRequest('Liên Quân')">TẠO ĐƠN</button>
+</div>
+</section>
+
+<section id="account" class="page">
+<div class="panel">
+<h2>TÀI KHOẢN CỦA TÔI</h2>
+<p id="userInfo">Chưa đăng nhập</p>
+<p id="myBalance">Số dư: 0đ</p>
+<button onclick="logout()">ĐĂNG XUẤT</button>
+<h3>Lịch sử đơn hàng</h3>
+<div id="history"></div>
+</div>
+</section>
+
+<section id="admin" class="page">
+<div class="panel">
+<h2>⚙️ ADMIN HUNTER GAMING</h2>
+<input id="adminEmail" placeholder="Gmail Admin">
+<input id="adminPass" type="password" placeholder="Mật khẩu Admin">
+<button onclick="adminLogin()">ĐĂNG NHẬP ADMIN</button>
+<p id="adminMsg"></p>
+</div>
+
+<div id="adminPanel" class="panel" style="display:none">
+<h2>QUẢN LÝ SHOP</h2>
+<h3>Thêm tài khoản</h3>
+<input id="newName" placeholder="Tên acc">
+<input id="newPrice" type="number" placeholder="Giá tiền">
+<select id="newGame">
+<option>Liên Quân</option>
+<option>Free Fire</option>
+</select>
+<button onclick="addProduct()">THÊM ACC</button>
+
+<h3>Sản phẩm</h3>
+<div id="adminProducts"></div>
+
+<h3>Đơn hàng</h3>
+<div id="adminOrders"></div>
+</div>
+</section>
+
+</main>
+
+<footer>
+HUNTER GAMING PRO © 2026
+<p>Zalo: <a href="https://zalo.me/0933454413">0933454413</a></p>
+</footer>
+
+<script>
+let users=[];
+let current=null;
+let isAdmin=false;
+let products=[
+{name:"Acc Liên Quân #001",game:"Liên Quân",price:150000},
+{name:"Acc Liên Quân #002",game:"Liên Quân",price:250000},
+{name:"Acc Free Fire #001",game:"Free Fire",price:100000},
+{name:"Acc Free Fire #002",game:"Free Fire",price:300000}
+];
+let orders=[];
+
+function show(id){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+if(id==='shop')render();
+if(id==='account')updateAccount();
+if(id==='admin'&&isAdmin)renderAdmin();
+}
+function money(n){return Number(n).toLocaleString('vi-VN')+'đ'}
+
+function register(){
+let e=regEmail.value.trim(),p=regPass.value;
+if(!e||p.length<6){regMsg.textContent='Vui lòng nhập Gmail và mật khẩu từ 6 ký tự';return}
+if(users.some(x=>x.email===e)){regMsg.textContent='Gmail đã tồn tại';return}
+users.push({email:e,password:p,balance:0});
+regMsg.textContent='Đăng ký thành công (demo)';
+}
+
+function login(){
+let u=users.find(x=>x.email===email.value.trim()&&x.password===password.value);
+if(!u){loginMsg.textContent='Sai thông tin đăng nhập';return}
+current=u;
+show('home');
+updateAccount();
+}
+function logout(){current=null;show('home')}
+
+function render(){
+products.innerHTML='';
+document.getElementById('products').innerHTML=
+window.products.map((p,i)=>`
+<div class="card">
+<h3>${p.name}</h3>
+<p>${p.game}</p>
+<div class="price">${money(p.price)}</div>
+<button onclick="buy(${i})">MUA ACC</button>
+</div>`).join('');
+}
+
+function buy(i){
+if(!current){alert('Vui lòng đăng nhập');show('login');return}
+let p=products[i];
+orders.push({email:current.email,name:'Mua '+p.name,price:p.price,status:'Chờ xác nhận'});
+alert('Đã tạo đơn mua thử nghiệm. Shop sẽ xác nhận đơn và bàn giao acc.');
+updateAccount();
+}
+
+function cardRequest(){
+if(!current){alert('Đăng nhập trước');show('login');return}
+let code='CARD'+Date.now().toString().slice(-8);
+cardResult.textContent='Đã tạo mã yêu cầu '+code+
+' cho '+provider.value+', mệnh giá '+money(value.value)+
+'. Chờ tích hợp cổng thẻ và xác minh.';
+}
+
+function gameRequest(game){
+if(!current){alert('Đăng nhập trước');show('login');return}
+let id=game==='Free Fire'?ffid.value:lqid.value;
+if(!id.trim()){alert('Vui lòng nhập ID game');return}
+let price=Number(game==='Free Fire'?ffpack.value:lqpack.value);
+orders.push({email:current.email,name:'Nạp '+game+' ID '+id,price,status:'Chờ xử lý'});
+alert('Đã tạo đơn thử nghiệm. Chưa thực hiện nạp game.');
+updateAccount();
+}
+
+function updateAccount(){
+userInfo.textContent=current?'Gmail: '+current.email:'Chưa đăng nhập';
+myBalance.textContent='Số dư: '+money(current?current.balance:0);
+document.getElementById('history').innerHTML=
+orders.filter(x=>!current||x.email===current.email)
+.map(x=>`<p>${x.name} - ${money(x.price)} - ${x.status}</p>`).join('')
+||'Chưa có đơn hàng';
+}
+
+function adminLogin(){
+if(adminEmail.value.trim()==='checongthanh33@gmail.com'&&adminPass.value==='11'){
+isAdmin=true;
+adminMsg.textContent='Đăng nhập Admin demo thành công';
+adminPanel.style.display='block';
+renderAdmin();
+}else{adminMsg.textContent='Sai tài khoản hoặc mật khẩu'}
+}
+
+function addProduct(){
+if(!isAdmin)return;
+let n=newName.value.trim(),p=Number(newPrice.value);
+if(!n||p<=0){alert('Nhập đầy đủ thông tin');return}
+products.push({name:n,game:newGame.value,price:p});
+renderAdmin();
+render();
+}
+function renderAdmin(){
+document.getElementById('adminProducts').innerHTML=
+products.map((p,i)=>`<p>${p.name} - ${money(p.price)}
+<button onclick="deleteProduct(${i})">Xóa</button></p>`).join('');
+document.getElementById('adminOrders').innerHTML=
+orders.map(o=>`<p>${o.email} - ${o.name} - ${money(o.price)} - ${o.status}</p>`).join('')
+||'Chưa có đơn hàng';
+}
+function deleteProduct(i){
+if(!isAdmin)return;
+products.splice(i,1);
+renderAdmin();render();
+}
+render();
+</script>
+</body>
+</html>
